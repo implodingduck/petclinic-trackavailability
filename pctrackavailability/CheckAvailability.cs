@@ -91,11 +91,14 @@ namespace pctrackavailability
             using (var httpClient = new HttpClient()) 
             { 
                 try{
-                    string BASEURL = Environment.GetEnvironmentVariable("PETCLINIC_BASEURL"); 
+                    string BASEURL = Environment.GetEnvironmentVariable("PETCLINIC_BASEURL");
+                    log.LogInformation($"Calling {BASEURL}"); 
                     HttpResponseMessage response = await httpClient.GetAsync($"{BASEURL}"); 
                     response.EnsureSuccessStatusCode();
+                    log.LogInformation($"Calling {BASEURL}/owners/find"); 
                     response = await httpClient.GetAsync($"{BASEURL}/owners/find"); 
                     response.EnsureSuccessStatusCode();
+                    log.LogInformation($"Calling {BASEURL}/owners?lastName=Selenium"); 
                     response = await httpClient.GetAsync($"{BASEURL}/owners?lastName=Selenium"); 
                     response.EnsureSuccessStatusCode();
                 }
