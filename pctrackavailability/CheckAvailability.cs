@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 
 
-namespace qbtrackavailability
+namespace pctrackavailability
 {
     public static class CheckAvailability
     {
@@ -90,8 +90,19 @@ namespace qbtrackavailability
             log.LogInformation($"Attempting to run Availability Test");
             using (var httpClient = new HttpClient()) 
             { 
-                string BASEURL = Environment.GetEnvironmentVariable("PETCLINIC_BASEURL"); 
-                await httpClient.GetStringAsync($"{BASEURL}"); 
+                try{
+                    string BASEURL = Environment.GetEnvironmentVariable("PETCLINIC_BASEURL"); 
+                    HttpResponseMessage response = await httpClient.GetAsync($"{BASEURL}"); 
+                    response.EnsureSuccessStatusCode();
+                    response = await httpClient.GetAsync($"{BASEURL}/owners/find"); 
+                    response.EnsureSuccessStatusCode();
+                    response = await httpClient.GetAsync($"{BASEURL}/owners?lastName=Selenium"); 
+                    response.EnsureSuccessStatusCode();
+                }
+                catch(HttpRequestException e)
+                {
+                     log.LogError("Message: {0}", e.Message)
+                }
             } 
         } 
     }
