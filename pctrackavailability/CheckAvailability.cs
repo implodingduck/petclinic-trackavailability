@@ -101,7 +101,7 @@ namespace pctrackavailability
                 }
                 catch(HttpRequestException e)
                 {
-                     log.LogError("Message: {0}", e.Message)
+                     log.LogError("Message: {0}", e.Message);
                 }
             } 
         } 
