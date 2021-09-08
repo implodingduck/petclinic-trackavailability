@@ -91,7 +91,7 @@ namespace qbtrackavailability
             using (var httpClient = new HttpClient()) 
             { 
                 string BASEURL = Environment.GetEnvironmentVariable("PETCLINIC_BASEURL"); 
-                await httpClient.GetStringAsync($"BASEURL"); 
+                await httpClient.GetStringAsync($"{BASEURL}"); 
             } 
         } 
     }
